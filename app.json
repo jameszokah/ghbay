@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "HelloWorld",
-    "slug": "expo-template-default",
+    "name": "ghbay",
+    "slug": "ghbay",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -13,13 +13,15 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.jameszokah.ghbay"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.jameszokah.ghbay"
     },
     "web": {
       "bundler": "metro",
@@ -31,6 +33,18 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "1ddde249-0ece-4bb8-9c14-035e29d704e9"
+      }
+    },
+    "owner": "jameszokah",
+    "updates": {
+      "url": "https://u.expo.dev/1ddde249-0ece-4bb8-9c14-035e29d704e9"
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
     }
   }
 }
