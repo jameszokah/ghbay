@@ -1,20 +1,60 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import { Image, StyleSheet, Platform, ImageBackground, View } from 'react-native';
 
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import { CountryDropDown } from '@/components/CountryDropDown';
+import { SafeAreaView } from 'react-native';
+import { useEffect, useState } from 'react';
+import { useNavigation } from 'expo-router';
+import { Text } from '@/components/ui/text';
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
+import { SearchInput } from '@/components/SearchInput';
 
 export default function HomeScreen() {
+  const navigation = useNavigation();
+  const [search, setSearch] = useState('');
+
+  const GITHUB_AVATAR_URI = 'https://github.com/jameszokah.png';
+
+  useEffect(() => {
+    navigation.setOptions({ headerShown: true, headerTitle: 'GHBAY', headerTransparent: true, headerBlurEffect: 'systemChromeMaterialLight', headerStyle: { backgroundColor: 'transparent' }, headerTitleStyle: {
+      fontWeight: 'bold', fontSize: 30
+    },
+    headerRight: () => (
+      <View className='flex flex-row items-center gap-2 w-full justify-end' style={{ marginRight: 16, flex: 1, justifyContent: 'center' }}>
+        <Text>James</Text>
+        <Avatar alt="James">
+          <AvatarImage source={{ uri: GITHUB_AVATAR_URI }} />
+          <AvatarFallback>
+            <Text>JZ</Text>
+          </AvatarFallback>
+        </Avatar>
+      </View>
+    ),
+   });
+  }, [navigation]);
+  
   return (
+    <>
+    {/* <SafeAreaView className='flex-1' /> */}
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
       headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
+        <ImageBackground
+          source={require('@/assets/images/red-pattern-bg.jpg')}
+          // style={{ width: '100%', height: '100%', flex: 1, justifyContent: 'center', alignItems: 'center' }}
+          resizeMode="cover"
+          className='flex-1 justify-center items-center w-full h-full'
+        >
+          <View className='flex-1 justify-center items-center w-full h-full'>
+            <CountryDropDown />
+            <SearchInput />
+          </View>  
+        </ImageBackground>
+      }
+    >
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Welcome!</ThemedText>
         <HelloWave />
@@ -47,6 +87,7 @@ export default function HomeScreen() {
         </ThemedText>
       </ThemedView>
     </ParallaxScrollView>
+    </>
   );
 }
 
